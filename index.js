@@ -28,6 +28,12 @@ app.use(express.json({ limit: "1GB" }));
 
 app.use("/auth", userRoutes);
 app.use("/message", messageRoutes);
+
+app.get("/", (req, res) => {
+  res.status(200).json({ message: "Hello, world!" });
+});
+
+
 mongoose
   .connect(process.env.MONGO_URL)
   .then(() => {
