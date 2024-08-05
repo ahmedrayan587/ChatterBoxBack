@@ -24,6 +24,10 @@ app.use(
   })
 );
 app.use(express.json({ limit: "1GB" }));
+module.exports = (req, res) => {
+  res.status(200).json({ message: 'Hello, world!' });
+};
+
 
 app.use("/auth", userRoutes);
 app.use("/message", messageRoutes);
