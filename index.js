@@ -32,10 +32,18 @@ app.use("/message", messageRoutes);
 app.get("/", (req, res) => {
   res.status(200).json({ message: "Hello, world!" });
 });
+app.use((req, res, next) => {
+  console.log(`Received request for ${req.method} ${req.url}`);
+  next();
+});
 
 
 mongoose
-  .connect(process.env.MONGO_URL)
+  .connect(process.env.MONGO_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    serverSelectionTimeoutMS: 5000, // Set a timeout of 5 seconds for initial connection
+  })
   .then(() => {
     console.log("DB Connected");
   })
