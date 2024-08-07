@@ -9,6 +9,7 @@ import { Server } from "socket.io";
 const app = express();
 configDotenv();
 const allowedOrigins = [
+  "https://17lj68hq-5173.uks1.devtunnels.ms",
   "http://localhost:5173", // Local development
   "https://ahmedrayan587.github.io/ChatterBoxFront", // GitHub Pages
 ];
