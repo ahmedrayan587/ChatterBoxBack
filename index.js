@@ -9,13 +9,18 @@ import { Server } from "socket.io";
 const app = express();
 configDotenv();
 const allowedOrigins = [
-  "https://ahmedrayan587.github.io/ChatterBoxFront",
   "http://localhost:5173", // Local development
-  "https://ahmedrayan587.github.io", // GitHub Pages
+  "https://ahmedrayan587.github.io/ChatterBoxFront", // GitHub Pages
 ];
 app.use(
   cors({
-    origin: "https://ahmedrayan587.github.io/ChatterBoxFront"
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
   })
 );
 app.use(express.json({ limit: "1GB" }));
@@ -44,7 +49,7 @@ const server = app.listen(process.env.PORT, () => {
 //socket.io code to make a realTime chat.
 const io = new Server(server, {
   cors: {
-    origin: "https://ahmedrayan587.github.io/ChatterBoxFront",
+    origin: allowedOrigins,
     methods: ["GET", "POST"],
     credentials: true,
   },
