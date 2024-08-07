@@ -10,7 +10,7 @@ const app = express();
 configDotenv();
 const allowedOrigins = [
   "http://localhost:5173", // Local development
-  "https://ahmedrayan587.github.io/ChatterBoxFront/", // GitHub Pages
+  "https://ahmedrayan587.github.io/ChatterBoxFront", // GitHub Pages
 ];
 app.use(
   cors({
